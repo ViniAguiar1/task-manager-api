@@ -6,10 +6,185 @@
     "description": "API for managing tasks with user authentication"
   },
   "paths": {
+    "/tasks": {
+      "post": {
+        "summary": "Create a new task",
+        "tags": [
+          "Tasks"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaskInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Task successfully created"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/tasks/{userId}": {
+      "get": {
+        "summary": "Get all tasks by user ID",
+        "tags": [
+          "Tasks"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of tasks",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Task"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tasks/{id}": {
+      "get": {
+        "summary": "Get a task by ID",
+        "tags": [
+          "Tasks"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Task found",
+            "content": {
+              "application/json": {
+                "$ref": "#/components/schemas/Task"
+              }
+            }
+          },
+          "404": {
+            "description": "Task not found"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update a task by ID",
+        "tags": [
+          "Tasks"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaskInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Task updated"
+          },
+          "404": {
+            "description": "Task not found"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a task by ID",
+        "tags": [
+          "Tasks"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Task deleted"
+          },
+          "404": {
+            "description": "Task not found"
+          }
+        }
+      }
+    },
     "/projects": {
       "get": {
         "summary": "Get all projects",
-        "tags": ["Projects"],
+        "tags": [
+          "Projects"
+        ],
         "security": [
           {
             "Bearer": []
@@ -33,7 +208,9 @@
       },
       "post": {
         "summary": "Create a new project",
-        "tags": ["Projects"],
+        "tags": [
+          "Projects"
+        ],
         "security": [
           {
             "Bearer": []
@@ -62,7 +239,9 @@
     "/projects/{id}": {
       "get": {
         "summary": "Get a project by ID",
-        "tags": ["Projects"],
+        "tags": [
+          "Projects"
+        ],
         "security": [
           {
             "Bearer": []
@@ -96,7 +275,9 @@
       },
       "patch": {
         "summary": "Update a project by ID",
-        "tags": ["Projects"],
+        "tags": [
+          "Projects"
+        ],
         "security": [
           {
             "Bearer": []
@@ -133,7 +314,9 @@
       },
       "delete": {
         "summary": "Delete a project by ID",
-        "tags": ["Projects"],
+        "tags": [
+          "Projects"
+        ],
         "security": [
           {
             "Bearer": []
@@ -162,7 +345,9 @@
     "/users/login": {
       "post": {
         "summary": "Login a user",
-        "tags": ["Users"],
+        "tags": [
+          "Users"
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -216,7 +401,9 @@
     "/users": {
       "get": {
         "summary": "Get all users",
-        "tags": ["Users"],
+        "tags": [
+          "Users"
+        ],
         "security": [
           {
             "Bearer": []
@@ -240,7 +427,9 @@
       },
       "post": {
         "summary": "Create a new user",
-        "tags": ["Users"],
+        "tags": [
+          "Users"
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -264,7 +453,9 @@
     "/users/{id}": {
       "get": {
         "summary": "Get a user by ID",
-        "tags": ["Users"],
+        "tags": [
+          "Users"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -298,7 +489,9 @@
       },
       "patch": {
         "summary": "Update a user by ID",
-        "tags": ["Users"],
+        "tags": [
+          "Users"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -335,7 +528,9 @@
       },
       "delete": {
         "summary": "Delete a user by ID",
-        "tags": ["Users"],
+        "tags": [
+          "Users"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -392,7 +587,10 @@
             "items": {
               "type": "string"
             },
-            "example": ["#2C3E3E", "#1A2424"]
+            "example": [
+              "#2C3E3E",
+              "#1A2424"
+            ]
           },
           "tasksCount": {
             "type": "integer",
@@ -406,7 +604,13 @@
       },
       "ProjectInput": {
         "type": "object",
-        "required": ["title", "type", "subtype", "date", "color"],
+        "required": [
+          "title",
+          "type",
+          "subtype",
+          "date",
+          "color"
+        ],
         "properties": {
           "title": {
             "type": "string",
@@ -429,7 +633,10 @@
             "items": {
               "type": "string"
             },
-            "example": ["#2C3E3E", "#1A2424"]
+            "example": [
+              "#2C3E3E",
+              "#1A2424"
+            ]
           }
         }
       },
@@ -464,7 +671,14 @@
       },
       "UserInput": {
         "type": "object",
-        "required": ["name", "email", "password", "phone", "cpf", "photo"],
+        "required": [
+          "name",
+          "email",
+          "password",
+          "phone",
+          "cpf",
+          "photo"
+        ],
         "properties": {
           "name": {
             "type": "string",
@@ -489,6 +703,105 @@
           "photo": {
             "type": "string",
             "example": "https://example.com/photo.jpg"
+          }
+        }
+      },
+      "Task": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "1"
+          },
+          "title": {
+            "type": "string",
+            "example": "Atualizações no Sistema de Design"
+          },
+          "deadline": {
+            "type": "string",
+            "example": "2024-10-24"
+          },
+          "priority": {
+            "type": "string",
+            "enum": ["baixa", "media", "alta"],
+            "example": "alta"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["pendente", "em-progresso", "concluido"],
+            "example": "em-progresso"
+          },
+          "description": {
+            "type": "string",
+            "example": "Atualizar os componentes do sistema de design."
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "2024-10-01"
+          },
+          "completedAt": {
+            "type": "string",
+            "nullable": true,
+            "example": null
+          },
+          "projectId": {
+            "type": "string",
+            "example": "1"
+          },
+          "userId": {
+            "type": "string",
+            "example": "1"
+          },
+          "habit": {
+            "type": "boolean",
+            "example": false
+          },
+          "priorityColor": {
+            "type": "string",
+            "example": "#F44336"
+          }
+        }
+      },
+      "TaskInput": {
+        "type": "object",
+        "required": [
+          "title",
+          "deadline",
+          "priority",
+          "status",
+          "description",
+          "projectId"
+        ],
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Atualizações no Sistema de Design"
+          },
+          "deadline": {
+            "type": "string",
+            "example": "2024-10-24"
+          },
+          "priority": {
+            "type": "string",
+            "enum": ["baixa", "media", "alta"],
+            "example": "alta"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["pendente", "em-progresso", "concluido"],
+            "example": "em-progresso"
+          },
+          "description": {
+            "type": "string",
+            "example": "Atualizar os componentes do sistema de design."
+          },
+          "projectId": {
+            "type": "string",
+            "example": "1"
+          },
+          "habit": {
+            "type": "boolean",
+            "example": false
           }
         }
       }
