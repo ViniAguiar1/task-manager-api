@@ -6,6 +6,159 @@
     "description": "API for managing tasks with user authentication"
   },
   "paths": {
+    "/projects": {
+      "get": {
+        "summary": "Get all projects",
+        "tags": ["Projects"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of projects",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Project"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new project",
+        "tags": ["Projects"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProjectInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Project successfully created"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/projects/{id}": {
+      "get": {
+        "summary": "Get a project by ID",
+        "tags": ["Projects"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Project found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Project"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Project not found"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update a project by ID",
+        "tags": ["Projects"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProjectInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Project updated"
+          },
+          "404": {
+            "description": "Project not found"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a project by ID",
+        "tags": ["Projects"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Project deleted"
+          },
+          "404": {
+            "description": "Project not found"
+          }
+        }
+      }
+    },
     "/users/login": {
       "post": {
         "summary": "Login a user",
@@ -44,7 +197,7 @@
                     },
                     "token": {
                       "type": "string",
-                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxIiwiZW1haWwiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTYyMzEwODU5NSwiZXhwIjoxNjIzMTEyMTk1fQ.5B8Pq3B0aFGI8FXT-2Qhlv-jVr-u5P5vZc3DsK2BQY8"
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
                     }
                   }
                 }
@@ -132,7 +285,9 @@
             "description": "User found",
             "content": {
               "application/json": {
-                "$ref": "#/components/schemas/User"
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
               }
             }
           },
@@ -209,6 +364,75 @@
   },
   "components": {
     "schemas": {
+      "Project": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "1"
+          },
+          "title": {
+            "type": "string",
+            "example": "Design System"
+          },
+          "type": {
+            "type": "string",
+            "example": "Front-End"
+          },
+          "subtype": {
+            "type": "string",
+            "example": "Development"
+          },
+          "date": {
+            "type": "string",
+            "example": "October 20, 2024"
+          },
+          "color": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": ["#2C3E3E", "#1A2424"]
+          },
+          "tasksCount": {
+            "type": "integer",
+            "example": 12
+          },
+          "completedTasks": {
+            "type": "integer",
+            "example": 5
+          }
+        }
+      },
+      "ProjectInput": {
+        "type": "object",
+        "required": ["title", "type", "subtype", "date", "color"],
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Design System"
+          },
+          "type": {
+            "type": "string",
+            "example": "Front-End"
+          },
+          "subtype": {
+            "type": "string",
+            "example": "Development"
+          },
+          "date": {
+            "type": "string",
+            "example": "October 20, 2024"
+          },
+          "color": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": ["#2C3E3E", "#1A2424"]
+          }
+        }
+      },
       "User": {
         "type": "object",
         "properties": {

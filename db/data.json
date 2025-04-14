@@ -9,5 +9,20 @@
       "photo": "https://github.com/ViniAguiar1.png",
       "password": "$2b$08$ODJ.ZLw54cNUkHXH8nH2LuXje2KnZo2DhDJByh3FZ7X3JQx0YEKWi"
     }
+  ],
+  "projects": [
+    {
+      "id": "1",
+      "title": "Design System",
+      "type": "Front-End",
+      "subtype": "Development",
+      "date": "October 20, 2024",
+      "color": [
+        "#2C3E3E",
+        "#1A2424"
+      ],
+      "tasksCount": 0,
+      "completedTasks": 0
+    }
   ]
 }
