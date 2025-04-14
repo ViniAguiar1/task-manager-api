@@ -1,0 +1,13 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Vinicius Aguiar",
+      "email": "vinicius@easytogo.com.br",
+      "phone": "(11) 96062-5600",
+      "cpf": "491.430.918-14",
+      "photo": "https://github.com/ViniAguiar1.png",
+      "password": "$2b$08$ODJ.ZLw54cNUkHXH8nH2LuXje2KnZo2DhDJByh3FZ7X3JQx0YEKWi"
+    }
+  ]
+}
