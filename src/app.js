@@ -1,19 +1,20 @@
 const express = require("express");
 const swaggerUi = require("swagger-ui-express");
-const path = require("path");
 const userRoutes = require("./routes/userRoutes");
+const projectRoutes = require("./routes/projectRoutes");
+const authMiddleware = require("./middleware/authMiddleware"); // Import authentication middleware
 
 const app = express();
 app.use(express.json());
 
-// Carregar o arquivo swagger.json diretamente
-const swaggerSpec = require(path.join(__dirname, 'swagger.json'));
+const swaggerDocument = require("./swagger.json"); // Import the Swagger JSON file
 
-// Rota para acessar a documentação do Swagger
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+// Swagger setup
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-// Usar as rotas de usuários
+// Routes
 app.use("/users", userRoutes);
+app.use("/projects", authMiddleware, projectRoutes); // Apply auth middleware to project routes
 
 const PORT = 3000;
 app.listen(PORT, () => {
