@@ -23,6 +23,35 @@
       ],
       "tasksCount": 0,
       "completedTasks": 0
+    },
+    {
+      "id": "2",
+      "title": "Design System",
+      "type": "Back-End",
+      "subtype": "Development",
+      "date": "October 20, 2024",
+      "color": [
+        "#2C3E3E",
+        "#1A2424"
+      ],
+      "tasksCount": 0,
+      "completedTasks": 0
+    }
+  ],
+  "tasks": [
+    {
+      "id": "1",
+      "title": "Atualizações no Sistema de Design",
+      "deadline": "2024-10-24",
+      "priority": "alta",
+      "status": "em-progresso",
+      "description": "Atualizar os componentes do sistema de design.",
+      "createdAt": "2025-04-14",
+      "completedAt": null,
+      "projectId": "1",
+      "userId": "1",
+      "habit": false,
+      "priorityColor": "#F44336"
     }
   ]
 }
